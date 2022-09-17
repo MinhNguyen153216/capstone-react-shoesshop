@@ -1,6 +1,71 @@
 @import "../base/base";
 @import "../themes/variables";
 
-.red-text {
-  color: red;
+//header
+.header {
+  background: #000000;
+  .container {
+    .top-header {
+      height: 50px;
+      align-items: center;
+      .header-left {
+        margin-left: 24px;
+      }
+      .header-right {
+        a {
+          font-style: normal;
+          font-weight: 300;
+          font-size: 16px;
+          line-height: 19px;
+          text-decoration: none;
+          color: #f7f7f7;
+        }
+        .cart {
+          margin-right: 10px;
+          font-size: 30px;
+          line-height: 36px;
+        }
+        .login {
+          margin-right: 10px;
+          border: 1px solid #000000;
+          text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+        .register-menu {
+          margin-right: 20px;
+          border: 1px solid #000000;
+          text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+      }
+    }
+  }
+}
+
+//nav
+.menu-header {
+  position: relative;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  a {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    text-decoration: none;
+    color: #000000;
+    opacity: 0.7;
+    margin-left: 25px;
+    &:hover {
+      color: #000000;
+      opacity: 1;
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 60px;
+        background: #000000;
+        border: 1px solid #000000;
+      }
+    }
+  }
 }
