@@ -28,6 +28,7 @@ export default function Register() {
         .min(1, "pass từ 1 - 32 ký tự!")
         .max(32, "pass từ 1 - 32 ký tự!"),
       phone: Yup.string().required("phone không được bỏ trống!"),
+      // gender: Yup.string().required("Vui lòng chọn giới tính"),
     }),
     onSubmit: (values) => {
       console.log(values);
@@ -159,6 +160,7 @@ export default function Register() {
                         <div className="gender-option">
                           <div className="gender-click">
                             <input
+                              defaultChecked={true}
                               type="radio"
                               name="gender"
                               value={true}
