@@ -69,3 +69,21 @@ const userReducer = createSlice({
 export const {} = userReducer.actions;
 
 export default userReducer.reducer;
+
+export const registerApi = (userRegister) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.post("/users/signup", userRegister);
+      //Sau khi đăng nhập thành công => lưu dữ liệu vào localstorage hoặc cookie
+      console.log(result);
+      //Chuyển hướng về profile, trang quên mật khẩu
+      alert('Đăng ký thành công!')
+      history.push("/login");
+      //Sau khi đăng nhập thành công thì dispatch action getProfile
+    } catch (err) {
+      alert("Tài khoản đã tồn tại")
+      history.push("/register");
+      console.log(err);
+    }
+  };
+};

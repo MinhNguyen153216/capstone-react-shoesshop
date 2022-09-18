@@ -94,7 +94,13 @@ http.interceptors.response.use(
   (err) => {
     console.log(err.response.status);
     //bắt lỗi không hợp lệ
-    if (err.response.status === 400 || err.response.status === 404) {
+    if (err.response.status === 400) {
+      //bắt lỗi đăng ký email đã tồn tại
+      alert("Email đã được đăng ký!");
+      history.push("/");
+      return Promise.reject(err);
+    }
+    if (err.response.status === 404) {
       alert("Sản phẩm không tồn tại");
       history.push("/");
       return Promise.reject(err);

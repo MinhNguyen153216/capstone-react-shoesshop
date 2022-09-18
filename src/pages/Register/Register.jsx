@@ -2,6 +2,7 @@ import React from "react";
 import { Field, Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
+import { registerApi } from "../../redux/reducers/userReducer";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -20,18 +21,19 @@ export default function Register() {
       name: Yup.string().required("name không được để trống!"),
       password: Yup.string()
         .required("password không được bỏ trống!")
-        .min(1, "pass từ 1 - 32 ký tự!")
-        .max(32, "pass từ 1 - 32 ký tự!"),
+        .min(8, "pass từ 8 - 12 ký tự!")
+        .max(12, "pass từ 8 - 12 ký tự!"),
       passwordConfirm: Yup.string()
         .oneOf([Yup.ref("password"), null], "password phải trùng nhau!")
         .required("password confirm không được bỏ trống!")
-        .min(1, "pass từ 1 - 32 ký tự!")
-        .max(32, "pass từ 1 - 32 ký tự!"),
+        .min(8, "pass từ 8 - 12 ký tự!")
+        .max(12, "pass từ 8 - 12 ký tự!"),
       phone: Yup.string().required("phone không được bỏ trống!"),
       // gender: Yup.string().required("Vui lòng chọn giới tính"),
     }),
     onSubmit: (values) => {
       console.log(values);
+      dispatch(registerApi(values));
     },
   });
 
@@ -200,7 +202,6 @@ export default function Register() {
           </div>
         </section>
       </div>
-      ;
     </div>
   );
 }
