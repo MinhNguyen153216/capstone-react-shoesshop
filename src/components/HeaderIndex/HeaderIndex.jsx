@@ -6,10 +6,14 @@ export default function HeaderIndex() {
   const { userLogin } = useSelector((state) => state.userReducer);
 
   const countCart = (orders) => {
+    let count = 0;
     if (orders.length === 0) {
       return 0;
     }
-    return orders.length;
+    orders.forEach((orderDetail) => {
+      count += orderDetail.quantity;
+    });
+    return count;
   };
 
   const renderCart = () => {
