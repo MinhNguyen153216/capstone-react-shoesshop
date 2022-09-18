@@ -161,14 +161,23 @@ export default function Register() {
                             <input
                               type="radio"
                               name="gender"
-                              defaultChecked="checked"
                               value={true}
+                              onChange={() =>
+                                form.setFieldValue("gender", true)
+                              }
                             />
                             <br />
                             <label className="label-title">Male</label>
                           </div>
                           <div className="gender-click">
-                            <input type="radio" name="gender" value={false} />
+                            <input
+                              type="radio"
+                              name="gender"
+                              value={false}
+                              onChange={() =>
+                                form.setFieldValue("gender", false)
+                              }
+                            />
                             <br />
                             <label className="label-title">Female</label>
                           </div>
