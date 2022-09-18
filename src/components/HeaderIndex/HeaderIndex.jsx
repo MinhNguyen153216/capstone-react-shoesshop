@@ -10,9 +10,12 @@ export default function HeaderIndex() {
     if (orders.length === 0) {
       return 0;
     }
-    orders.forEach((orderDetail) => {
-      count += orderDetail.quantity;
+    orders.forEach((order) => {
+      let [obj] = order.orderDetail;
+      // console.log(obj.quantity);
+      count += obj.quantity;
     });
+
     return count;
   };
 
