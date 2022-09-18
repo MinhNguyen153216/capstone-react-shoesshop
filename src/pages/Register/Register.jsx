@@ -1,14 +1,37 @@
 import React from "react";
-import { useFormik } from "formik";
+import { Field, Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Register() {
   const dispatch = useDispatch();
   const form = useFormik({
-    initialValues: {},
-    validationSchema: Yup.object().shape({}),
-    onSubmit: (values) => {},
+    initialValues: {
+      email: "",
+      password: "",
+      name: "",
+      gender: true,
+      phone: "",
+    },
+    validationSchema: Yup.object().shape({
+      email: Yup.string()
+        .required("email không được bỏ trống!")
+        .email("email không đúng định dạng!"),
+      name: Yup.string().required("name không được để trống!"),
+      password: Yup.string()
+        .required("password không được bỏ trống!")
+        .min(1, "pass từ 1 - 32 ký tự!")
+        .max(32, "pass từ 1 - 32 ký tự!"),
+      passwordConfirm: Yup.string()
+        .oneOf([Yup.ref("password"), null], "password phải trùng nhau!")
+        .required("password confirm không được bỏ trống!")
+        .min(1, "pass từ 1 - 32 ký tự!")
+        .max(32, "pass từ 1 - 32 ký tự!"),
+      phone: Yup.string().required("phone không được bỏ trống!"),
+    }),
+    onSubmit: (values) => {
+      console.log(values);
+    },
   });
 
   return (
@@ -20,34 +43,43 @@ export default function Register() {
               <div className="col-10 mx-auto detail-register">
                 <h3 className="text-left display-6 text-dark fs-1">Register</h3>
                 <hr />
-                <form id="formRegister">
+                <form id="formRegister" onSubmit={form.handleSubmit}>
                   <div className="row register-item">
                     <div className="col-6 form-group">
                       <label>Email</label>
                       <input
                         type="email"
                         className="form-control"
-                        id="txtEmail"
+                        id="email"
+                        name="email"
                         placeholder="email"
-                        required
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        onChange={form.handleChange}
+                        onBlur={form.handleBlur}
+                        // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                       />
-                      <span>Validation</span>
-                      <span id="spanEmail" className="text-danger" />
+                      {form.errors.email ? (
+                        <span className="text-danger">{form.errors.email}</span>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div className="col-6 form-group">
                       <label>Name</label>
                       <input
                         type="text"
                         className="form-control"
-                        id="txtName"
+                        id="name"
+                        name="name"
                         placeholder="name"
-                        required
-                        pattern="^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+$"
+                        onChange={form.handleChange}
+                        onBlur={form.handleBlur}
+                        // pattern="^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+$"
                       />
-                      <span>Validation</span>
-
-                      <span id="spanName" className="text-danger" />
+                      {form.errors.name ? (
+                        <span className="text-danger">{form.errors.name}</span>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                   <div className="row register-item">
@@ -56,25 +88,37 @@ export default function Register() {
                       <input
                         type="password"
                         className="form-control"
-                        id="txtPassword"
+                        id="password"
+                        name="password"
                         placeholder="password"
-                        required
+                        onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                       />
-                      <span>Validation</span>
-                      <span id="spanPassword" className="text-danger" />
+                      {form.errors.password ? (
+                        <span className="text-danger">
+                          {form.errors.password}
+                        </span>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div className="col-6 form-group">
                       <label>Phone</label>
                       <input
                         type="text"
                         className="form-control"
-                        id="txtPhone"
+                        id="phone"
+                        name="phone"
                         placeholder="phone"
-                        required
-                        pattern="[0-9]+"
+                        onChange={form.handleChange}
+                        onBlur={form.handleBlur}
+                        // pattern="[0-9]+"
                       />
-                      <span>Validation</span>
-                      <span id="spanPhone" className="text-danger" />
+                      {form.errors.phone ? (
+                        <span className="text-danger">{form.errors.phone}</span>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                   <div className="row register-item">
@@ -84,11 +128,18 @@ export default function Register() {
                         type="password"
                         className="form-control"
                         id="passwordConfirm"
+                        name="passwordConfirm"
                         placeholder="password confirm"
-                        required
+                        onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                       />
-                      <span>Validation</span>
-                      <span id="spanPasswordConfirm" className="text-danger" />
+                      {form.errors.passwordConfirm ? (
+                        <span className="text-danger">
+                          {form.errors.passwordConfirm}
+                        </span>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div className="col-6 form-gender">
                       <div id="gender-content">
@@ -108,22 +159,16 @@ export default function Register() {
                         <div className="gender-option">
                           <div className="gender-click">
                             <input
-                              id="genderMale"
                               type="radio"
+                              name="gender"
                               defaultChecked="checked"
-                              name="radio"
-                              defaultValue="true"
+                              value={true}
                             />
                             <br />
                             <label className="label-title">Male</label>
                           </div>
                           <div className="gender-click">
-                            <input
-                              id="genderFemale"
-                              type="radio"
-                              name="radio"
-                              defaultValue="false"
-                            />
+                            <input type="radio" name="gender" value={false} />
                             <br />
                             <label className="label-title">Female</label>
                           </div>
@@ -131,14 +176,14 @@ export default function Register() {
                       </div>
                     </div>
                   </div>
-                </form>
-                <div className="button">
-                  <div id="btnSubmit">
-                    <button type="button" className="btn btn-primary">
-                      Submit
-                    </button>
+                  <div className="button">
+                    <div id="btnSubmit">
+                      <button type="submit" className="btn btn-primary">
+                        Submit
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
           </div>
