@@ -8,6 +8,7 @@ import {
   getStoreJson,
   setStoreJson,
   http,
+  setCookie,
 } from "../../util/tool";
 
 const initialState = {
@@ -77,12 +78,28 @@ export const registerApi = (userRegister) => {
       //Sau khi đăng nhập thành công => lưu dữ liệu vào localstorage hoặc cookie
       console.log(result);
       //Chuyển hướng về profile, trang quên mật khẩu
-      alert('Đăng ký thành công!')
+      alert("Đăng ký thành công!");
       history.push("/login");
       //Sau khi đăng nhập thành công thì dispatch action getProfile
     } catch (err) {
-      alert("Tài khoản đã tồn tại")
+      alert("Tài khoản đã tồn tại");
       history.push("/register");
+      console.log(err);
+    }
+  };
+};
+export const loginApi = (userLogin) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.post("/users/signin", userLogin);
+      console.log(result);
+      setCookie(USER_LOGIN, result.data.content.accessToken, 30);
+      setStore(USER_LOGIN, result.data.content.accessToken);
+      alert("Đăng nhập thành công!");
+      history.push("/index");
+    } catch (err) {
+      alert("Kiểm tra lại email và password");
+      history.push("/login");
       console.log(err);
     }
   };

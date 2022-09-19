@@ -191,7 +191,7 @@ export default function Register() {
                   </div>
                   <div className="button">
                     <div id="btnSubmit">
-                      <button type="submit" className="btn btn-primary">
+                      <button type="submit" className="btn-1 btn btn-primary">
                         Submit
                       </button>
                     </div>
