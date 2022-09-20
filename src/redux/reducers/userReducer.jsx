@@ -12,62 +12,22 @@ import {
 } from "../../util/tool";
 
 const initialState = {
-  userLogin: getStore(USER_LOGIN),
-  // userLogin: {
-  //   name: "asd",
-  //   orderHistory: [
-  //     {
-  //       orderDetail: [
-  //         {
-  //           name: "Adidas Prophere",
-  //           alias: "adidas-prophere",
-  //           shortDescription:
-  //             "The midsole contains 20% more Boost for an amplified Boost feeling.\r\n\r\n",
-  //           quantity: 995,
-  //           price: 350,
-  //           image: "https://shop.cyberlearn.vn/images/adidas-prophere.png",
-  //           description:
-  //             "The adidas Primeknit upper wraps the foot with a supportive fit that enhances movement.\r\n\r\n",
-  //         },
-  //       ],
-  //       id: 1350,
-  //       date: "2022-09-17T09:02:01",
-  //       status: null,
-  //       email: "minhnguyen@gmail.com",
-  //       alias: "",
-  //     },
-  //     {
-  //       orderDetail: [
-  //         {
-  //           name: "Adidas Prophere Black White",
-  //           alias: "adidas-prophere-black-white",
-  //           shortDescription:
-  //             "The midsole contains 20% more Boost for an amplified Boost feeling.\r\n\r\n",
-  //           quantity: 990,
-  //           price: 450,
-  //           image:
-  //             "https://shop.cyberlearn.vn/images/adidas-prophere-black-white.png",
-  //           description:
-  //             "The adidas Primeknit upper wraps the foot with a supportive fit that enhances movement.\r\n\r\n",
-  //         },
-  //       ],
-  //       id: 1351,
-  //       date: "2022-09-17T09:02:14",
-  //       status: null,
-  //       email: "minhnguyen@gmail.com",
-  //       alias: "",
-  //     },
-  //   ],
-  // },
+  userLogin: getStoreJson(USER_LOGIN),
+  // userLogin: { a: "asd", b: "zxc" },
 };
 
 const userReducer = createSlice({
   name: "userReducer",
   initialState,
-  reducers: {},
+  reducers: {
+    getProfileAction: (state, action) => {
+      console.log("action", action.payload);
+      state.userLogin = action.payload;
+    },
+  },
 });
 
-export const {} = userReducer.actions;
+export const { getProfileAction } = userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -93,13 +53,32 @@ export const loginApi = (userLogin) => {
     try {
       const result = await http.post("/users/signin", userLogin);
       console.log(result);
-      setCookie(USER_LOGIN, result.data.content.accessToken, 30);
-      setStore(USER_LOGIN, result.data.content.accessToken);
+
+      setCookie(ACCESS_TOKEN, result.data.content.accessToken, 30);
+      setStore(ACCESS_TOKEN, result.data.content.accessToken);
+
+      dispatch(getProfileApi());
       alert("Đăng nhập thành công!");
       history.push("/index");
     } catch (err) {
       alert("Kiểm tra lại email và password");
       history.push("/login");
+      console.log(err);
+    }
+  };
+};
+
+export const getProfileApi = (accessToken = getStore(ACCESS_TOKEN)) => {
+  console.log(accessToken);
+  return async (dispatch) => {
+    try {
+      const result = await http.post("users/getProfile");
+
+      setStoreJson(USER_LOGIN, result.data.content);
+
+      dispatch(getProfileAction(result.data.content));
+    } catch (err) {
+      history.push("/home");
       console.log(err);
     }
   };

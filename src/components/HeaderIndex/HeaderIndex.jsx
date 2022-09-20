@@ -1,16 +1,19 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function HeaderIndex() {
   const { userLogin } = useSelector((state) => state.userReducer);
 
-  const countCart = (orders) => {
+  const countCart = (userLogin) => {
+    let { ordersHistory } = userLogin;
     let count = 0;
-    if (orders.length === 0) {
+    // if user doesn't have any order
+    if (!ordersHistory) {
       return 0;
     }
-    orders.forEach((order) => {
+    ordersHistory.forEach((order) => {
       let [obj] = order.orderDetail;
       // console.log(obj.quantity);
       count += obj.quantity;
@@ -20,11 +23,18 @@ export default function HeaderIndex() {
   };
 
   const renderCart = () => {
-    if (userLogin == null) {
+    console.log(userLogin);
+    if (!userLogin) {
       return (
         <>
-          <NavLink className="cart" to={"/login"}>
-            <img src="./img/image 8.png" alt="imgcart" />
+          <NavLink className="me-3" to={"/login"}>
+            <img
+              src="./img/image 8.png"
+              alt="imgcart"
+              width={25}
+              className={"me-1"}
+            />
+
             <span>(0)</span>
           </NavLink>
         </>
@@ -32,15 +42,20 @@ export default function HeaderIndex() {
     }
     return (
       <>
-        <NavLink className="cart" to={"/cart"}>
-          <img src="./img/image 8.png" alt="imgcart" />
-          <span>({countCart(userLogin.orderHistory)})</span>
+        <NavLink className="me-3" to={"/cart"}>
+          <img
+            src="./img/image 8.png"
+            alt="imgcart"
+            width={25}
+            className={"me-1"}
+          />
+          {/* <span>(0)</span> */}({countCart(userLogin)})
         </NavLink>
       </>
     );
   };
   const renderLoginItem = () => {
-    if (userLogin == null) {
+    if (!userLogin) {
       return (
         <>
           <NavLink className="login" to={"/login"}>
@@ -52,7 +67,13 @@ export default function HeaderIndex() {
         </>
       );
     }
-    return <NavLink to={"/profile"}>{userLogin.name}</NavLink>;
+    return (
+      <NavLink to={"/profile"}>
+        {" "}
+        <FontAwesomeIcon icon="fa-solid fa-user" className="me-1" />
+        {userLogin.name}
+      </NavLink>
+    );
   };
   return (
     <div>
@@ -65,14 +86,14 @@ export default function HeaderIndex() {
               </NavLink>
 
               <div className="header-right">
-                <NavLink to={"/search"}>
-                  <img src="./img/download.png" alt="imgdownload" width={25} />
+                <NavLink to={"/search"} className={"me-3"}>
                   <img
-                    src="./img/Search.png"
-                    alt="imgsearch"
-                    width={50}
-                    className="me-3"
+                    src="./img/download.png"
+                    alt="imgdownload"
+                    width={20}
+                    className="me-1"
                   />
+                  Search
                 </NavLink>
                 {renderCart()}
                 {renderLoginItem()}

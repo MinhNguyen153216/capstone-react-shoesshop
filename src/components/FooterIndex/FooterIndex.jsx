@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 export default function FooterIndex() {
   return (
@@ -10,16 +11,16 @@ export default function FooterIndex() {
               <h4>GET HELP</h4>
               <ul>
                 <li>
-                  <a href="contact.html">Home</a>
+                  <NavLink to={"/"}>Home</NavLink>
                 </li>
                 <li>
-                  <a href="#">Nike</a>
+                  <NavLink to={"/"}>Nike</NavLink>
                 </li>
                 <li>
-                  <a href="#">Addidas</a>
+                  <NavLink to={"/"}>Addidas</NavLink>
                 </li>
                 <li>
-                  <a href="#">Contact</a>
+                  <NavLink to={"/"}>Contact</NavLink>
                 </li>
               </ul>
             </div>
