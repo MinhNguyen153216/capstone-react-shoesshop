@@ -1,1 +1,26 @@
 // biến, mixin
+// ----------------Variables--------------------
+// Text color
+$txt-color-primary: #000000;
+
+// Font weight
+$fw-thin: 100;
+$fw-xlight: 200;
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semi-bold: 600;
+$fw-bold: 700;
+$fw-xbold: 800;
+$fw-black: 900;
+
+//
+
+// ----------------Mixin-----------------------
+//
+@mixin text-config($fw, $fs, $line-h, $color) {
+  font-weight: $fw;
+  font-size: $fs;
+  line-height: $line-h;
+  color: $color;
+}
