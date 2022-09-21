@@ -100,7 +100,7 @@ export default function Login() {
                 <div className="row justify-content-center py-4">
                   <div className="col-6 form-group d-flex align-items-center ">
                     <FacebookLogin
-                      appId="493742808918289"
+                      appId="1108418000101590"
                       autoLoad={true}
                       fields="name,email,picture"
                       callback={responseFacebook}
