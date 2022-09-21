@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 import { loginApi } from "../../redux/reducers/userReducer";
+// import FacebookLogin from "react-facebook-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -28,6 +30,9 @@ export default function Login() {
     },
   });
 
+  const responseFacebook = (response) => {
+    console.log(response);
+  };
   return (
     <div>
       <section className="register">
@@ -92,12 +97,26 @@ export default function Login() {
                     </button>
                   </div>
                 </div>
-                <div className="row justify-content-center pb-3">
-                  <div className="col-6 form-group d-flex align-items-center">
-                    <button className="btn-3 btn btn-primary fs-5">
-                      <FontAwesomeIcon icon="fa-brands fa-facebook" /> Continue
-                      With Facebook
-                    </button>
+                <div className="row justify-content-center py-4">
+                  <div className="col-6 form-group d-flex align-items-center ">
+                    <FacebookLogin
+                      appId="493742808918289"
+                      autoLoad={true}
+                      fields="name,email,picture"
+                      callback={responseFacebook}
+                      render={(renderProps) => (
+                        <button
+                          className="btn-3 btn btn-primary align-items-center fs-5"
+                          onClick={renderProps.onClick}
+                        >
+                          <FontAwesomeIcon
+                            icon="fa-brands fa-facebook"
+                            className="me-1 display-6"
+                          />
+                          <span className="px-3">Continue With Facebook</span>
+                        </button>
+                      )}
+                    />
                   </div>
                 </div>
               </form>
