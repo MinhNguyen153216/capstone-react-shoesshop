@@ -13,11 +13,12 @@ export default function HeaderIndex() {
     if (!ordersHistory) {
       return 0;
     }
-    ordersHistory.forEach((order) => {
-      let [obj] = order.orderDetail;
-      // console.log(obj.quantity);
-      count += obj.quantity;
-    });
+    // ordersHistory.forEach((order) => {
+    //   let [obj] = order.orderDetail;
+    //   // console.log(obj.quantity);
+    //   count += obj.quantity;
+    // });
+    count = ordersHistory.length;
 
     return count;
   };
