@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
-import { loginApi } from "../../redux/reducers/userReducer";
+import { loginApi, fbLoginApi } from "../../redux/reducers/userReducer";
 // import FacebookLogin from "react-facebook-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
@@ -31,7 +31,8 @@ export default function Login() {
   });
 
   const responseFacebook = (response) => {
-    console.log(response);
+    console.log(response)
+    dispatch(fbLoginApi(response))
   };
   return (
     <div>
@@ -97,7 +98,8 @@ export default function Login() {
                     </button>
                   </div>
                 </div>
-                <div className="row justify-content-center py-4">
+              </form>
+              <div className="row justify-content-center py-4">
                   <div className="col-6 form-group d-flex align-items-center ">
                     <FacebookLogin
                       appId="1108418000101590"
@@ -119,7 +121,6 @@ export default function Login() {
                     />
                   </div>
                 </div>
-              </form>
             </div>
           </div>
         </div>

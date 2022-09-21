@@ -83,3 +83,25 @@ export const getProfileApi = (accessToken = getStore(ACCESS_TOKEN)) => {
     }
   };
 };
+
+export const fbLoginApi = (fbToken) => {
+  return async (dispatch) => {
+    try {
+      console.log(fbToken)
+      const result = await http.post("/Users/facebooklogin", fbToken);
+      console.log(result);
+      console.log(result.data.content.accessToken)
+
+      // setCookie(ACCESS_TOKEN, result.data.content.accessToken, 30);
+      // setStore(ACCESS_TOKEN, result.data.content.accessToken);
+
+      // dispatch(getProfileApi());
+      // alert("Đăng nhập thành công!");
+      // history.push("/index");
+    } catch (err) {
+      // alert("Kiểm tra lại email và password");
+      // history.push("/login");
+      console.log(err);
+    }
+  };
+};
