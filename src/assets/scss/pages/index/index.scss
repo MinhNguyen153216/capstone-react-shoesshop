@@ -7,18 +7,22 @@
   .owl-carousel {
     .item-carousel {
       .container {
+        // background-color: black;
+        height: 440px;
         // position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
         .item-left {
+          display: flex;
+          justify-content: center;
+          align-items: center;
           width: 75%;
           img {
             display: block;
-            height: 392px;
-            width: auto;
+            height: 250px;
             @media screen and (max-width: 768px) {
-              height: 280px;
+              height: 200px;
             }
             @media screen and (max-width: 576px) {
               width: 100%;
@@ -31,6 +35,7 @@
           }
         }
         .item-right {
+          text-align: left;
           width: 25%;
           h1 {
             @include text-config($fw-light, 40px, 48px, #000000);
@@ -112,6 +117,7 @@
 }
 
 .product-feature {
+  margin-top: -4px;
   .product-title {
     height: 74px;
     background: linear-gradient(180deg, #f21299 0%, #1b02b5 100%);

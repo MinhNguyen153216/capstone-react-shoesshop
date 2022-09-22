@@ -87,9 +87,7 @@ export const getProfileApi = (accessToken = getStore(ACCESS_TOKEN)) => {
 export const fbLoginApi = (fbToken) => {
   return async (dispatch) => {
     try {
-      console.log(fbToken)
       const result = await http.post("/Users/facebooklogin", fbToken);
-      console.log(result);
       console.log(result.data.content.accessToken)
 
       // setCookie(ACCESS_TOKEN, result.data.content.accessToken, 30);
