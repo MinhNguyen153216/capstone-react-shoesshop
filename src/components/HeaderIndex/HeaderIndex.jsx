@@ -2,9 +2,15 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect } from "react";
 
 export default function HeaderIndex() {
   const { userLogin } = useSelector((state) => state.userReducer);
+
+  useEffect(() => {
+    renderCart();
+    renderLoginItem();
+  }, [userLogin]);
 
   const countCart = (userLogin) => {
     let { ordersHistory } = userLogin;
@@ -69,6 +75,7 @@ export default function HeaderIndex() {
       </NavLink>
     );
   };
+
   return (
     <div>
       <div>

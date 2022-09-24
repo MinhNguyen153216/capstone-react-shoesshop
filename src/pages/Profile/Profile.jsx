@@ -12,20 +12,8 @@ export default function Profile() {
   useEffect(() => {
     if (!getStore(USER_LOGIN)) {
       dispatch(getProfileApi());
-      // const timer = setTimeout(() => {
-      //   form.initialValues = {
-      //     email: userLogin.email,
-      //     password: "",
-      //     gender: userLogin.gender,
-      //     phone: userLogin.phone,
-      //     name: userLogin.name,
-      //   };
-      // }, 10000);
-      // return () => {
-      //   clearTimeout(timer);
-      // };
     }
-  }, []);
+  }, [userLogin]);
   const form = useFormik({
     initialValues: {
       email: userLogin?.email,
@@ -43,23 +31,19 @@ export default function Profile() {
     }),
     onSubmit: (values) => {
       let { email, password, gender, phone, name } = values;
-      let userUpdate = { ...userLogin, email, password, gender, phone, name };
+      let userUpdate = {
+        ...userLogin,
+        ...(email ? { email } : {}),
+        ...(password ? { password } : {}),
+        ...(gender === null || gender === undefined ? {} : { gender }),
+        ...(phone ? { phone } : {}),
+        ...(name ? { name } : {}),
+      };
       console.log(userUpdate);
       // dispatch(loginApi(values));
     },
   });
-  // const renderDefaultCheck = (gender) => {
-  //   if (userLogin.gender) {
-  //     if (gender === "Male" && userLogin.gender === true) {
-  //       return true;
-  //     }
-  //     if (gender === "Female" && userLogin.gender === false) {
-  //       return true;
-  //     }
-  //     return false;
-  //   }
-  //   return false;
-  // };
+  
   return (
     <div className="profile py-4">
       <section className="profile-upper">
