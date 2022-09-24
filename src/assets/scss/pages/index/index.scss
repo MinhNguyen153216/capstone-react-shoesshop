@@ -129,4 +129,17 @@
       @include text-config(400, 40px, 48px, #ffffff);
     }
   }
+  .product {
+    .item {
+      .card {
+        position: relative;
+        .heart {
+          width: 35px;
+          position: absolute;
+          top: 30px;
+          right: 30px;
+        }
+      }
+    }
+  }
 }

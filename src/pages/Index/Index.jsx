@@ -63,9 +63,10 @@ export default function Index() {
             <img
               src={product.image}
               alt="..."
-              className="mx-auto mt-5"
-              height={156}
+              className="mx-auto mt-3"
+              height={180}
             />
+            {renderHeart()}
             <div className="card-body">
               <h5 className="card-title">{product.name}</h5>
               <p className="card-text">
@@ -102,7 +103,6 @@ export default function Index() {
                     style={{
                       fontWeight: 600,
                       fontSize: 24,
-                      lineHeight: 29,
                     }}
                   >
                     {`${product.price}$`}
@@ -114,6 +114,14 @@ export default function Index() {
         </div>
       );
     });
+  };
+
+  const renderHeart = () => {
+    return (
+      <>
+        <img src="./img/unheart.png" alt="..." className="heart" />
+      </>
+    );
   };
 
   return (
