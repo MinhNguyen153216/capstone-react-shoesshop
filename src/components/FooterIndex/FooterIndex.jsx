@@ -28,16 +28,16 @@ export default function FooterIndex() {
               <h4>SUPPORT</h4>
               <ul>
                 <li>
-                  <a href="#">About</a>
+                  <NavLink to="/">About</NavLink>
                 </li>
                 <li>
-                  <a href="#">Contact</a>
+                  <NavLink to="/">Contact</NavLink>
                 </li>
                 <li>
-                  <a href="#">Help</a>
+                  <NavLink to="/">Help</NavLink>
                 </li>
                 <li>
-                  <a href="#">Phone</a>
+                  <NavLink to="/">Phone</NavLink>
                 </li>
               </ul>
             </div>
@@ -45,10 +45,10 @@ export default function FooterIndex() {
               <h4>REGISTER</h4>
               <ul>
                 <li>
-                  <a href="#">Register</a>
+                  <NavLink to="/register">Register</NavLink>
                 </li>
                 <li>
-                  <a href="#">Login</a>
+                  <NavLink to="/login">Login</NavLink>
                 </li>
               </ul>
             </div>

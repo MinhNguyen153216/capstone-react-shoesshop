@@ -79,8 +79,21 @@ export const getProfileApi = (accessToken = getStore(ACCESS_TOKEN)) => {
 
       dispatch(getProfileAction(result.data.content));
     } catch (err) {
+      alert("Vui lòng đăng nhập");
       history.push("/home");
       console.log(err);
+    }
+  };
+};
+export const updateProfileApi = (userUpdate) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.post("/Users/updateProfile", userUpdate);
+      console.log(result);
+      dispatch(getProfileApi());
+    } catch (err) {
+      console.log(err);
+      alert("Cập nhật dữ liệu không thành công!");
     }
   };
 };
