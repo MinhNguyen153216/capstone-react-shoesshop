@@ -1,2 +1,135 @@
 @import "../../base/base";
 @import "../../themes/variables";
+
+.detail {
+  margin-top: 58px;
+  margin-bottom: 39px;
+  .container {
+    .row-detail {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .col-left {
+        max-width: 35%;
+        margin-bottom: 78px;
+        .detail-left {
+          width: 334px;
+          height: 335px;
+          background-color: #f8f8f8;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            width: 220px;
+          }
+        }
+      }
+      .col-right {
+        margin-left: 128px;
+        max-width: 55%;
+        .detail-right {
+          h3 {
+            @include text-config($fw-light, 30px, 36px, #000000);
+          }
+          p {
+            @include text-config($fw-regular, 16px, 19px, #140101);
+          }
+          span {
+            @include text-config($fw-medium, 24px, 29px, #1ed90e);
+          }
+          .size {
+            margin-top: 15px;
+            display: flex;
+            .size-num {
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              text-align: center;
+              height: 50px;
+              width: 50px;
+              background-color: #cccccc;
+              margin-right: 21px;
+              p {
+                display: inline-block;
+                @include text-config($fw-semi-bold, 24px, 29px, #1e1d1d);
+                margin: auto;
+              }
+            }
+          }
+          h1 {
+            margin-top: 17px;
+            @include text-config($fw-semi-bold, 30px, 36px, #fc0303);
+          }
+          .changeSize {
+            display: flex;
+            .enhance {
+              cursor: pointer;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 50px;
+              height: 50px;
+              background: linear-gradient(180deg, #6181f3 0%, #7c97f5 99.48%);
+
+              p {
+                @include text-config($fw-regular, 30px, 36px, #fffcfc);
+                margin: auto;
+              }
+            }
+            p {
+              @include text-config($fw-regular, 30px, 36px, #000000);
+              margin: auto;
+              margin-left: 25px;
+              margin-right: 25px;
+            }
+          }
+          .addBTN {
+            cursor: pointer;
+            margin-top: 7px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 175px;
+            height: 64px;
+            @include text-config($fw-medium, 24px, 29px, #fff8f8);
+            background: linear-gradient(
+              270deg,
+              rgba(62, 32, 248, 0.9) 5.14%,
+              #d017ee 89.71%
+            );
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    margin-top: 35px;
+  }
+  @media screen and (max-width: 576px) {
+    margin-top: 20px;
+  }
+}
+
+.product {
+  margin-top: 46px;
+  .container {
+    h2 {
+      @include text-config($fw-regular, 40px, 48px, #000000);
+    }
+    .row {
+      .item {
+        .card {
+          width: 334px;
+          position: relative;
+          .heart {
+            color: red;
+            font-size: 35px;
+            position: absolute;
+            top: 30px;
+            right: 30px;
+          }
+        }
+      }
+    }
+  }
+}

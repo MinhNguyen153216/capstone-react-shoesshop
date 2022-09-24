@@ -12,6 +12,7 @@ import {
 
 const initialState = {
   listProduct: [],
+  productDetail: {},
 };
 
 const productReducer = createSlice({
@@ -21,10 +22,14 @@ const productReducer = createSlice({
     getAllProductAction: (state, action) => {
       state.listProduct = action.payload;
     },
+    getProductDetailAction: (state, action) => {
+      state.productDetail = action.payload;
+    },
   },
 });
 
-export const { getAllProductAction } = productReducer.actions;
+export const { getAllProductAction, getProductDetailAction } =
+  productReducer.actions;
 
 export default productReducer.reducer;
 
@@ -34,6 +39,17 @@ export const getAllProductApi = () => {
     try {
       const result = await http.get("/product");
       dispatch(getAllProductAction(result.data.content));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const getProductDetailApi = (id) => {
+  return async (dispatch) => {
+    try {
+      let result = await http.get(`./product/getbyid?id=${id}`);
+      dispatch(getProductDetailAction(result.data.content));
     } catch (err) {
       console.log(err);
     }

@@ -16,11 +16,11 @@ import "./assets/scss/styles.scss";
 import App from "./App";
 import Index from "./pages/Index/Index";
 import Search from "./pages/Search/Search";
-import Detail from "./pages/Detail/Detail";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Profile from "./pages/Profile/Profile";
 import Cart from "./pages/Cart/Cart";
+import Detail from "./pages/Detail/Detail";
 
 export const history = createBrowserHistory({ window });
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -34,6 +34,7 @@ root.render(
           <Route path="detail">
             <Route path=":id" element={<Detail />} />
           </Route>
+          {/* <Route path="detail" element={<Detail />} /> */}
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="cart" element={<Cart />} />

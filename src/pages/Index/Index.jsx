@@ -3,6 +3,7 @@ import { Carousel } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProductApi } from "../../redux/reducers/productReducer";
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const contentStyle = {
   height: "440px",
@@ -119,7 +120,7 @@ export default function Index() {
   const renderHeart = () => {
     return (
       <>
-        <img src="./img/unheart.png" alt="..." className="heart" />
+        <FontAwesomeIcon icon="fa-solid fa-heart" className="heart" />
       </>
     );
   };
