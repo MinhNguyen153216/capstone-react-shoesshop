@@ -102,7 +102,24 @@ export default function Login() {
 
               <div className="row justify-content-center py-4">
                 <div className="col-6 form-group d-flex align-items-center ">
-                  
+                  <FacebookLogin
+                    appId="1108418000101590"
+                    autoLoad={true}
+                    fields="name,email,picture"
+                    callback={responseFacebook}
+                    render={(renderProps) => (
+                      <button
+                        className="btn-3 btn btn-primary align-items-center fs-5 d-flex justify-content-center"
+                        onClick={renderProps.onClick}
+                      >
+                        <FontAwesomeIcon
+                          icon="fa-brands fa-facebook"
+                          className="me-1 display-6"
+                        />
+                        <span className="px-3 ">Continue With Facebook</span>
+                      </button>
+                    )}
+                  />
                 </div>
               </div>
             </div>
