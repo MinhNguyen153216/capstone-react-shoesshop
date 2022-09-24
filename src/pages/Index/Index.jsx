@@ -48,7 +48,10 @@ export default function Index() {
     dispatch(getAllProductApi());
   }, []);
 
-  const renderProduct = () => {
+  const renderProduct = (listProduct) => {
+    if (!listProduct) {
+      return <></>;
+    }
     return listProduct.map((product, index) => {
       return (
         <div className="col-4 item pt-5" key={index}>
@@ -194,7 +197,7 @@ export default function Index() {
         <div className="product mb-lg-5 mb-md-4 mb-sm-1">
           <div className="container">
             <div className="row" id="product-row">
-              {renderProduct()}
+              {renderProduct(listProduct)}
             </div>
           </div>
         </div>

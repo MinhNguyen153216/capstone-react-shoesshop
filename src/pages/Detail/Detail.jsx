@@ -15,6 +15,9 @@ export default function Detail() {
   }, [param.id]);
 
   const renderProductDetail = (productDetail) => {
+    if (!productDetail) {
+      return <></>;
+    }
     return (
       <>
         <div className="col-left">
@@ -68,7 +71,12 @@ export default function Detail() {
               borderRadius: 0,
             }}
           >
-            <img src={item.image} alt="..." className="m-auto mt-4" width="220px" />
+            <img
+              src={item.image}
+              alt="..."
+              className="m-auto mt-4"
+              width="220px"
+            />
             {renderHeart()}
             <div className="card-body">
               <h5 className="card-title">{item.name}</h5>
@@ -119,7 +127,7 @@ export default function Detail() {
   const renderHeart = () => {
     return (
       <>
-        <FontAwesomeIcon icon="fa-solid fa-heart" className="heart"/>
+        <FontAwesomeIcon icon="fa-solid fa-heart" className="heart" />
       </>
     );
   };
