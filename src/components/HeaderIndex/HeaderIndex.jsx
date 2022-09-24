@@ -30,7 +30,7 @@ export default function HeaderIndex() {
         <>
           <NavLink className="me-3" to={"/login"}>
             <FontAwesomeIcon
-              icon="fa-solid fa-magnifying-glass"
+              icon="fa-solid fa-cart-shopping"
               className="me-1"
             />
 
@@ -42,10 +42,7 @@ export default function HeaderIndex() {
     return (
       <>
         <NavLink className="me-3" to={"/cart"}>
-          <FontAwesomeIcon
-            icon="fa-regular fa-cart-shopping"
-            className="me-1"
-          />
+          <FontAwesomeIcon icon="fa-solid fa-cart-shopping" className="me-1" />
           {/* <span>(0)</span> */}({countCart(userLogin)})
         </NavLink>
       </>
@@ -84,10 +81,8 @@ export default function HeaderIndex() {
 
               <div className="header-right">
                 <NavLink to={"/search"} className={"me-3"}>
-                  <img
-                    src="./img/download.png"
-                    alt="imgdownload"
-                    width={20}
+                  <FontAwesomeIcon
+                    icon="fa-solid fa-magnifying-glass"
                     className="me-1"
                   />
                   Search
