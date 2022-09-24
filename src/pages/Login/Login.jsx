@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 import { loginApi, fbLoginApi } from "../../redux/reducers/userReducer";
 // import FacebookLogin from "react-facebook-login";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+// import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -102,7 +102,7 @@ export default function Login() {
 
               <div className="row justify-content-center py-4">
                 <div className="col-6 form-group d-flex align-items-center ">
-                  <FacebookLogin
+                  {/* <FacebookLogin
                     appId="1108418000101590"
                     autoLoad={true}
                     fields="name,email,picture"
@@ -119,7 +119,7 @@ export default function Login() {
                         <span className="px-3 ">Continue With Facebook</span>
                       </button>
                     )}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
