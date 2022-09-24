@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import { getProductDetailApi } from "../../redux/reducers/productReducer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRef } from "react";
 
 export default function Detail() {
+  const [sizeState, setSizeState] = useState("36");
+  const [quantityState, setQuantityState] = useState(1);
   const { productDetail } = useSelector((state) => state.productReducer);
   const dispatch = useDispatch();
   const param = useParams();
@@ -31,20 +34,29 @@ export default function Detail() {
             <p>{productDetail.description}</p>
             <span>Avaiable size</span>
             <div className="size" id="size-list">
-              <div className="size-num">
-                <p>38</p>
-              </div>
-              <div className="size-num">
-                <p>38</p>
-              </div>
+              {productDetail.size ? (
+                renderProductSize(productDetail.size)
+              ) : (
+                <></>
+              )}
             </div>
             <h1>{productDetail.price}$</h1>
             <div className="changeSize">
-              <div className="enhance">
+              <div
+                className="enhance"
+                onClick={() => {
+                  handleChangeQuantity(1);
+                }}
+              >
                 <p>+</p>
               </div>
-              <p>1</p>
-              <div className="enhance">
+              <p>{quantityState}</p>
+              <div
+                className="enhance"
+                onClick={() => {
+                  handleChangeQuantity(-1);
+                }}
+              >
                 <p>-</p>
               </div>
             </div>
@@ -57,7 +69,33 @@ export default function Detail() {
     );
   };
 
-  const renderProductSize = () => {};
+  const handleChangeQuantity = (number) => {
+    if (quantityState < 2 && number === -1) {
+      return alert("Không thể chỉnh số lượng dưới 1");
+    }
+    setQuantityState(quantityState + number);
+  };
+
+  const renderProductSize = (listSize) => {
+    return listSize.map((size, index) => {
+      return (
+        <div key={index}>
+          <div
+            className={"size-num " + (sizeState === size ? "active-size" : "")}
+            onClick={() => {
+              handleChangeSize(size);
+            }}
+          >
+            <p className={sizeState === size ? "active-size" : ""}>{size}</p>
+          </div>
+        </div>
+      );
+    });
+  };
+
+  const handleChangeSize = (size) => {
+    setSizeState(size);
+  };
 
   const renderRelateProduct = (relatedList) => {
     return relatedList.map((item, index) => {

@@ -13,6 +13,7 @@ import {
 const initialState = {
   listProduct: [],
   productDetail: {},
+  
 };
 
 const productReducer = createSlice({

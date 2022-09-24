@@ -1,6 +1,15 @@
 @import "../../base/base";
 @import "../../themes/variables";
 
+.active-size {
+  background: linear-gradient(
+    270deg,
+    rgba(62, 32, 248, 0.9) 5.14%,
+    #d017ee 89.71%
+  ) !important;
+  color: white !important;
+}
+
 .detail {
   margin-top: 58px;
   margin-bottom: 39px;
@@ -47,7 +56,7 @@
               text-align: center;
               height: 50px;
               width: 50px;
-              background-color: #cccccc;
+              background: linear-gradient(270deg, #cccccc 50%, #cccccc 50%);
               margin-right: 21px;
               p {
                 display: inline-block;
