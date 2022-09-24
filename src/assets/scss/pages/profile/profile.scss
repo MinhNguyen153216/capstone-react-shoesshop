@@ -3,28 +3,84 @@
 
 .profile {
   .profile-upper {
+    min-height: 3500px;
+    .profile-header{
+      background: $bg-gradient-label;
+      h3 {
+        height: 74px;
+        line-height: 74px;
+        align-items: center;
+        font-weight: $fw-regular;
+        color: #fffefe;
+        font-size: $fs-3;
+        padding-left: 34px;
+      }
+    }
     .container {
       .profile-upper-form {
-        h3 {
-          background: linear-gradient(180deg, #f21299 0%, #1b02b5 100%);
-          width: 575px;
-          height: 74px;
-          line-height: 74px;
-          align-items: center;
-          font-weight: $fw-regular;
-          color: #fffefe;
-          font-size: $fs-h3;
-          padding-left: 34px;
-        }
+position: relative;
         .profile-content {
-            margin-top: 26px;
+          margin-top: 26px;
           .profile-avatar {
             img {
               border-radius: 100%;
             }
           }
           .profile-form {
+            .profile-row {
+              .form-group {
+                label {
+                  font-weight: 500;
+                  font-size: 18px;
+                  line-height: 24px;
+                  letter-spacing: 0.135px;
+                  color: rgba(0, 0, 0, 0.6);
+                  margin-bottom: 5px;
+                  margin-top: 13px;
+                }
+                input {
+                  background: $bg-input;
+                  border-radius: 4px 4px 0px 0px;
+                  padding: 16px 12px 14px 14px;
+                  width: 443px;
+                  height: 54px;
+                }
+              }
+              .form-gender {
+                margin-top: 47px;
+                #gender-content {
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: flex-start;
+                  .gender-option {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    margin-right: 36px;
+                    .gender-click {
+                      text-align: center;
+                      margin-right: 28px;
+                      input {
+                        transform: scale(2);
+                      }
+                      label {
+                        font-weight: 400;
+                        font-size: 14px;
+                        line-height: 20px;
+                        letter-spacing: 0.25px;
+                        color: rgba(0, 0, 0, 0.6);
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
+        }
+        .btn-profile {
+          position: absolute;
+          right: 12%;
+          bottom: -23%;
         }
       }
     }

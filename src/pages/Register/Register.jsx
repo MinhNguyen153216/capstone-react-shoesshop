@@ -16,19 +16,19 @@ export default function Register() {
     },
     validationSchema: Yup.object().shape({
       email: Yup.string()
-        .required("email không được bỏ trống!")
+        .required("email không được để trống!")
         .email("email không đúng định dạng!"),
       name: Yup.string().required("name không được để trống!"),
       password: Yup.string()
-        .required("password không được bỏ trống!")
+        .required("password không được để trống!")
         .min(8, "pass từ 8 - 12 ký tự!")
         .max(12, "pass từ 8 - 12 ký tự!"),
       passwordConfirm: Yup.string()
         .oneOf([Yup.ref("password"), null], "password phải trùng nhau!")
-        .required("password confirm không được bỏ trống!")
+        .required("password confirm không được để trống!")
         .min(8, "pass từ 8 - 12 ký tự!")
         .max(12, "pass từ 8 - 12 ký tự!"),
-      phone: Yup.string().required("phone không được bỏ trống!"),
+      phone: Yup.string().required("phone không được để trống!"),
       // gender: Yup.string().required("Vui lòng chọn giới tính"),
     }),
     onSubmit: (values) => {
@@ -191,7 +191,7 @@ export default function Register() {
                   </div>
                   <div className="button">
                     <div id="btnSubmit">
-                      <button type="submit" className="btn-1 btn btn-primary">
+                      <button type="submit" className="btn-submit btn btn-primary">
                         Submit
                       </button>
                     </div>

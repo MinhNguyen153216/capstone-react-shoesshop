@@ -16,8 +16,20 @@ $fw-black: 900;
 //
 
 //Font-size
-$fs-h1: 50px;
-$fs-h3: 40px;
+$fs-1: 80px;
+$fs-2: 60px;
+$fs-3: 40px;
+$fs-4: 20px;
+$fs-5: 18px;
+$fs-6: 12px;
+//
+
+//background
+$bg-gray: #d9d9d9;
+$bg-input: rgba(33, 33, 33, 0.08);
+$bg-light: #ffffff;
+$bg-gradient-label: linear-gradient(180deg, #f21299 0%, #1b02b5 100%);
+
 //
 
 // ----------------Mixin-----------------------
@@ -27,4 +39,28 @@ $fs-h3: 40px;
   font-size: $fs;
   line-height: $line-h;
   color: $color;
+}
+
+//button
+.btn-submit {
+  font-weight: $fw-medium;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: #6200ee;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12),
+    0px 2px 4px rgba(0, 0, 0, 0.2);
+  border: #6200ee;
+  border-radius: 50px;
+  margin-left: 50%;
+  padding: 16px 28px;
+  margin-bottom: 77px;
+}
+.btn-submit:hover{
+background-color: #6200ee;
+opacity: 0.9;
 }
