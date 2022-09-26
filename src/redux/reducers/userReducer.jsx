@@ -89,8 +89,9 @@ export const updateProfileApi = (userUpdate) => {
   return async (dispatch) => {
     try {
       const result = await http.post("/Users/updateProfile", userUpdate);
-      console.log(result);
+      console.log("updateProfileApi", result);
       dispatch(getProfileApi());
+      alert('Cập nhật dữ liệu thành công!')
     } catch (err) {
       console.log(err);
       alert("Cập nhật dữ liệu không thành công!");
