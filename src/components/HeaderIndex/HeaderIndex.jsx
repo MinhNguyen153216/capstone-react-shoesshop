@@ -15,26 +15,27 @@ export default function HeaderIndex() {
 
   const countCart = (userLogin, listCartTemp) => {
     // console.log(orderHistory);
-    let { ordersHistory } = userLogin;
+    // let { ordersHistory } = userLogin;
     let count = 0;
 
     // if user doesn't have any order
-    if (!userLogin && !listCartTemp) {
-      return 0;
-    }
+    // if (!userLogin && !listCartTemp) {
+    //   return 0;
+    // }
 
-    if (!ordersHistory) {
-      listCartTemp?.forEach((item, index) => {
-        count += item.quantityState;
-      });
-      return count;
-    }
+    // if (!ordersHistory) {
+    //   listCartTemp?.forEach((item, index) => {
+    //     count += item.quantityState;
+    //   });
+    //   return count;
+    // }
+
     if (!listCartTemp) {
-      count += ordersHistory.length;
+      // count += ordersHistory.length;
       return count;
     }
 
-    count += ordersHistory.length;
+    // count += ordersHistory.length;
     listCartTemp.forEach((item, index) => {
       count += item.quantityState;
     });
