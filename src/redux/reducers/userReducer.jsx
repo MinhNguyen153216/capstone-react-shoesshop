@@ -79,7 +79,7 @@ export const getProfileApi = (accessToken = getStore(ACCESS_TOKEN)) => {
 
       dispatch(getProfileAction(result.data.content));
     } catch (err) {
-      alert("Vui lòng đăng nhập");
+      alert("Vui lòng đăng nhập để sử dụng chức năng này");
       history.push("/home");
       console.log(err);
     }

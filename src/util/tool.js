@@ -97,17 +97,17 @@ http.interceptors.response.use(
     //bắt lỗi không hợp lệ
     if (err.response.status === 400) {
       //bắt lỗi đăng ký email đã tồn tại
-      alert("Email đã được đăng ký!");
+      // alert("Email đã được đăng ký!");
       history.push("/");
       return Promise.reject(err);
     }
     if (err.response.status === 404) {
-      alert("Sản phẩm không tồn tại");
+      // alert("Sản phẩm không tồn tại");
       history.push("/");
       return Promise.reject(err);
     }
     if (err.response.status === 401 || err.response.status === 403) {
-      alert("Token không hợp lệ ! vui lòng đăng nhập lại. ");
+      // alert("Token không hợp lệ ! vui lòng đăng nhập lại. ");
       history.push("/login");
       return Promise.reject(err);
     }

@@ -6,31 +6,43 @@ import { useEffect } from "react";
 
 export default function HeaderIndex() {
   const { userLogin } = useSelector((state) => state.userReducer);
+  const { listCartTemp } = useSelector((state) => state.productReducer);
 
-  useEffect(() => {
-    renderCart();
-    renderLoginItem();
-  }, [userLogin]);
+  // useEffect(() => {
+  //   renderCart();
+  //   renderLoginItem();
+  // }, [userLogin]);
 
-  const countCart = (userLogin) => {
+  const countCart = (userLogin, listCartTemp) => {
+    // console.log(orderHistory);
     let { ordersHistory } = userLogin;
     let count = 0;
+
     // if user doesn't have any order
-    if (!ordersHistory) {
+    if (!userLogin && !listCartTemp) {
       return 0;
     }
-    // ordersHistory.forEach((order) => {
-    //   let [obj] = order.orderDetail;
-    //   // console.log(obj.quantity);
-    //   count += obj.quantity;
-    // });
-    count = ordersHistory.length;
+
+    if (!ordersHistory) {
+      listCartTemp?.forEach((item, index) => {
+        count += item.quantityState;
+      });
+      return count;
+    }
+    if (!listCartTemp) {
+      count += ordersHistory.length;
+      return count;
+    }
+
+    count += ordersHistory.length;
+    listCartTemp.forEach((item, index) => {
+      count += item.quantityState;
+    });
 
     return count;
   };
 
   const renderCart = () => {
-    console.log(userLogin);
     if (!userLogin) {
       return (
         <>
@@ -48,8 +60,8 @@ export default function HeaderIndex() {
     return (
       <>
         <NavLink className="me-3" to={"/cart"}>
-          <FontAwesomeIcon icon="fa-solid fa-cart-shopping" className="me-1" />
-          {/* <span>(0)</span> */}({countCart(userLogin)})
+          <FontAwesomeIcon icon="fa-solid fa-cart-shopping" className="me-1" />(
+          {countCart(userLogin, listCartTemp)})
         </NavLink>
       </>
     );

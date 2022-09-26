@@ -13,7 +13,7 @@ import {
 const initialState = {
   listProduct: [],
   productDetail: {},
-  
+  listCartTemp: [],
 };
 
 const productReducer = createSlice({
@@ -26,10 +26,18 @@ const productReducer = createSlice({
     getProductDetailAction: (state, action) => {
       state.productDetail = action.payload;
     },
+    addToCartAction: (state, action) => {
+      let index = state.listCartTemp.findIndex((i) => i.id === action.payload.id);
+      if (index === -1) {
+        state.listCartTemp.push(action.payload);
+      } else {
+        state.listCartTemp[index].quantityState += action.payload.quantityState;
+      }
+    },
   },
 });
 
-export const { getAllProductAction, getProductDetailAction } =
+export const { getAllProductAction, getProductDetailAction, addToCartAction } =
   productReducer.actions;
 
 export default productReducer.reducer;

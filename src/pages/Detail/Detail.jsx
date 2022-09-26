@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
-import { getProductDetailApi } from "../../redux/reducers/productReducer";
+import {
+  addToCartAction,
+  getProductDetailApi,
+} from "../../redux/reducers/productReducer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
+import { getStore, USER_LOGIN } from "../../util/tool";
+import { getProfileApi } from "../../redux/reducers/userReducer";
 
 export default function Detail() {
   const [sizeState, setSizeState] = useState("36");
@@ -60,13 +65,20 @@ export default function Detail() {
                 <p>-</p>
               </div>
             </div>
-            <NavLink to={"/cart"} className="addBTN">
+            <button className="addBTN" onClick={handleAddToCart}>
               Add to cart
-            </NavLink>
+            </button>
           </div>
         </div>
       </>
     );
+  };
+
+  const handleAddToCart = () => {
+    if (!getStore(USER_LOGIN)) {
+      dispatch(getProfileApi());
+    }
+    dispatch(addToCartAction({ ...productDetail, sizeState, quantityState }));
   };
 
   const handleChangeQuantity = (number) => {
