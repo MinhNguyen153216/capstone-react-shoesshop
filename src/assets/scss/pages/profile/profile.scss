@@ -3,8 +3,7 @@
 
 .profile {
   .profile-upper {
-    min-height: 3500px;
-    .profile-header{
+    .profile-header {
       background: $bg-gradient-label;
       h3 {
         height: 74px;
@@ -18,7 +17,8 @@
     }
     .container {
       .profile-upper-form {
-position: relative;
+        position: relative;
+        border-bottom: 1px solid #dedddc;
         .profile-content {
           margin-top: 26px;
           .profile-avatar {
@@ -86,5 +86,19 @@ position: relative;
     }
   }
   .profile-under {
+    .container {
+      .ant-tabs-tab:hover {
+        color: #dd2aed;
+      }
+      .ant-tabs-tab-btn {
+        font-size: $fs-3;
+        &:hover {
+          color: #dd2aed;
+        }
+      }
+      .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+        color: #dd2aed;
+      }
+    }
   }
 }

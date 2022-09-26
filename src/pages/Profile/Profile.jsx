@@ -3,18 +3,16 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { USER_LOGIN, getStore } from "../../util/tool";
-import { getProfileApi } from "../../redux/reducers/userReducer";
-import { clear } from "@testing-library/user-event/dist/clear";
+import {
+  getProfileApi,
+  updateProfileApi,
+} from "../../redux/reducers/userReducer";
+import { Tabs } from "antd";
 
 export default function Profile() {
+  // 1
   const { userLogin } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (!getStore(USER_LOGIN)) {
-      dispatch(getProfileApi());
-    }
-  }, [userLogin]);
-  
   const form = useFormik({
     initialValues: {
       email: userLogin?.email,
@@ -26,7 +24,6 @@ export default function Profile() {
     validationSchema: Yup.object().shape({
       email: Yup.string().email("email không đúng định dạng!"),
       password: Yup.string()
-        .required("Yêu cầu nhập password mới!")
         .min(8, "pass từ 8 - 12 ký tự!")
         .max(12, "pass từ 8 - 12 ký tự!"),
     }),
@@ -41,10 +38,62 @@ export default function Profile() {
         ...(name ? { name } : {}),
       };
       console.log(userUpdate);
-      // dispatch(loginApi(values));
+      dispatch(updateProfileApi(values));
     },
   });
-  
+
+  const renderOrderTable = () => {
+    if (!userLogin.ordersHistory) {
+      return <p>Chưa có order</p>;
+    }
+    console.log(userLogin.ordersHistory);
+    return userLogin.ordersHistory.map((order, index) => {
+      console.log(order);
+      return (
+        <div>
+          <p>+ Orders have been placed on {order.date}</p>
+          <table className="table" key={index}>
+            <thead>
+              <tr className="table" style={{ background: "#D9D9D9" }}>
+                <th>id</th>
+                <th>img</th>
+                <th>name</th>
+                <th>price</th>
+                <th>quantity</th>
+                <th>total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{order.id}</td>
+                <td>
+                  <img
+                    src={order.orderDetail[0].image}
+                    alt="shoes"
+                    width={85}
+                    height={56}
+                  />
+                </td>
+                <td>{order.orderDetail[0].name}</td>
+                <td>{order.orderDetail[0].price}</td>
+                <td>{order.orderDetail[0].quantity}</td>
+                <td>
+                  {order.orderDetail[0].price * order.orderDetail[0].quantity}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      );
+    });
+  };
+  // 3
+  useEffect(() => {
+    if (!getStore(USER_LOGIN)) {
+      dispatch(getProfileApi());
+    }
+  }, [userLogin]);
+  // 2
   return (
     <div className="profile py-4">
       <section className="profile-upper">
@@ -125,6 +174,7 @@ export default function Profile() {
                         className="form-control"
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        disabled
                       />
                       {form.errors.password ? (
                         <span className="text-danger">
@@ -197,7 +247,18 @@ export default function Profile() {
           </div>
         </div>
       </section>
-      <section className="profile-under"></section>
+      <section className="profile-under">
+        <div className="container">
+          <Tabs defaultActiveKey="1">
+            <Tabs.TabPane tab="Our history" key="1">
+              <div className="history">{renderOrderTable(userLogin)}</div>
+            </Tabs.TabPane>
+            <Tabs.TabPane tab="Favorite" key="2">
+              Favorite
+            </Tabs.TabPane>
+          </Tabs>
+        </div>
+      </section>
     </div>
   );
 }
