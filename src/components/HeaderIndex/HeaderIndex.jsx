@@ -89,7 +89,11 @@ export default function HeaderIndex() {
           <FontAwesomeIcon icon="fa-solid fa-user" className="me-1" />
           {userLogin.name}
         </NavLink>
-        <NavLink to={"/index"} onClick={logOut}>
+        <NavLink to={"/index"} onClick={logOut} className="ms-2">
+          <FontAwesomeIcon
+            icon="fa-solid fa-right-from-bracket"
+            className="me-1"
+          />
           LogOut
         </NavLink>
       </>
@@ -99,6 +103,7 @@ export default function HeaderIndex() {
   const logOut = () => {
     dispatch(logOutUserAction(userLogin));
     dispatch(clearListCartTempAction(listCartTemp));
+    alert("Đăng xuất hoàn tất");
   };
   return (
     <div>
