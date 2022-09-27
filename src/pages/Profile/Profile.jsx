@@ -8,6 +8,8 @@ import {
   updateProfileApi,
 } from "../../redux/reducers/userReducer";
 import { Tabs } from "antd";
+import { Space, Table, Tag } from "antd";
+import { Pagination } from "antd";
 
 export default function Profile() {
   // 1
@@ -43,6 +45,9 @@ export default function Profile() {
   });
 
   const renderOrderTable = () => {
+    if (!userLogin) {
+      return <></>;
+    }
     if (!userLogin.ordersHistory) {
       return <p>Chưa có order</p>;
     }
@@ -50,23 +55,42 @@ export default function Profile() {
     return userLogin.ordersHistory.map((order, index) => {
       console.log(order);
       return (
-        <div>
-          <p>+ Orders have been placed on {order.date}</p>
-          <table className="table" key={index}>
-            <thead>
-              <tr className="table" style={{ background: "#D9D9D9" }}>
-                <th>id</th>
-                <th>img</th>
-                <th>name</th>
-                <th>price</th>
-                <th>quantity</th>
-                <th>total</th>
+        <div key={index} style={{ marginTop: "65px" }}>
+          <p
+            style={{
+              color: "#DD2AED",
+              fontSize: "20px",
+            }}
+          >
+            + Orders have been placed on {order.date}
+          </p>
+          <table className="table">
+            <thead className="ant-table-thead">
+              <tr>
+                <th className="ant-table-cell" width={"10%"}>
+                  id
+                </th>
+                <th className="ant-table-cell" width={"15%"}>
+                  img
+                </th>
+                <th className="ant-table-cell" width={"30%"}>
+                  name
+                </th>
+                <th className="ant-table-cell" width={"15%"}>
+                  price
+                </th>
+                <th className="ant-table-cell" width={"15%"}>
+                  quantity
+                </th>
+                <th className="ant-table-cell" width={"15%"}>
+                  total
+                </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="ant-table-tbody">
               <tr>
-                <td>{order.id}</td>
-                <td>
+                <td className="ant-table-cell">{order.id}</td>
+                <td className="ant-table-cell">
                   <img
                     src={order.orderDetail[0].image}
                     alt="shoes"
@@ -74,10 +98,12 @@ export default function Profile() {
                     height={56}
                   />
                 </td>
-                <td>{order.orderDetail[0].name}</td>
-                <td>{order.orderDetail[0].price}</td>
-                <td>{order.orderDetail[0].quantity}</td>
-                <td>
+                <td className="ant-table-cell">{order.orderDetail[0].name}</td>
+                <td className="ant-table-cell">{order.orderDetail[0].price}</td>
+                <td className="ant-table-cell">
+                  {order.orderDetail[0].quantity}
+                </td>
+                <td className="ant-table-cell">
                   {order.orderDetail[0].price * order.orderDetail[0].quantity}
                 </td>
               </tr>
@@ -87,6 +113,51 @@ export default function Profile() {
       );
     });
   };
+  const columns = [
+    {
+      title: "id",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
+      title: "img",
+      dataIndex: "img",
+      key: "img",
+      render: (img) => <img src={img} alt="shoes" width={85} height={52} />,
+    },
+    {
+      title: "name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "price",
+      dataIndex: "price",
+      key: "price",
+    },
+    {
+      title: "quantity",
+      dataIndex: "quantity",
+      key: "quantity",
+    },
+    {
+      title: "total",
+      dataIndex: "total",
+      key: "total",
+    },
+  ];
+  const data = [...userLogin.ordersHistory].map((item, index) => {
+    return {
+      date: item.date,
+      id: item.id,
+      img: item.orderDetail[0].image,
+      name: item.orderDetail[0].name,
+      quantity: item.orderDetail[0].quantity,
+      price: item.orderDetail[0].price,
+      total: item.orderDetail[0].quantity * item.orderDetail[0].price,
+    };
+  });
+  console.log(data);
   // 3
   useEffect(() => {
     if (!getStore(USER_LOGIN)) {
@@ -250,11 +321,14 @@ export default function Profile() {
       <section className="profile-under">
         <div className="container">
           <Tabs defaultActiveKey="1">
-            <Tabs.TabPane tab="Our history" key="1">
+            <Tabs.TabPane tab="Order history" key="1">
               <div className="history">{renderOrderTable(userLogin)}</div>
+              <div style={{textAlign:'right'}}>
+                <Pagination defaultCurrent={1} total={50} />
+              </div>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Favorite" key="2">
-              Favorite
+              <Table columns={columns} dataSource={data} />
             </Tabs.TabPane>
           </Tabs>
         </div>
