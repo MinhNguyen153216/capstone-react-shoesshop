@@ -25,10 +25,14 @@ const userReducer = createSlice({
       console.log("action", action.payload);
       state.userLogin = action.payload;
     },
+    logOutUserAction: (state, action)=>{
+      localStorage.clear();
+      state.userLogin = null;
+    }
   },
 });
 
-export const { getProfileAction } = userReducer.actions;
+export const { getProfileAction,logOutUserAction } = userReducer.actions;
 
 export default userReducer.reducer;
 

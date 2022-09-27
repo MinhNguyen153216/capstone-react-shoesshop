@@ -1,13 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
+import { logOutUserAction } from "../../redux/reducers/userReducer";
+import { clearListCartTempAction } from "../../redux/reducers/productReducer";
 
 export default function HeaderIndex() {
   const { userLogin } = useSelector((state) => state.userReducer);
   const { listCartTemp } = useSelector((state) => state.productReducer);
-
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   renderCart();
   //   renderLoginItem();
@@ -81,14 +83,23 @@ export default function HeaderIndex() {
       );
     }
     return (
-      <NavLink to={"/profile"}>
-        {" "}
-        <FontAwesomeIcon icon="fa-solid fa-user" className="me-1" />
-        {userLogin.name}
-      </NavLink>
+      <>
+        <NavLink to={"/profile"}>
+          {" "}
+          <FontAwesomeIcon icon="fa-solid fa-user" className="me-1" />
+          {userLogin.name}
+        </NavLink>
+        <NavLink to={"/index"} onClick={logOut}>
+          LogOut
+        </NavLink>
+      </>
     );
   };
 
+  const logOut = () => {
+    dispatch(logOutUserAction(userLogin));
+    dispatch(clearListCartTempAction(listCartTemp));
+  };
   return (
     <div>
       <div>
