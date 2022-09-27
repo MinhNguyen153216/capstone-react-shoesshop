@@ -88,25 +88,28 @@ export default function Profile() {
               </tr>
             </thead>
             <tbody className="ant-table-tbody">
-              <tr>
-                <td className="ant-table-cell">{order.id}</td>
-                <td className="ant-table-cell">
-                  <img
-                    src={order.orderDetail[0].image}
-                    alt="shoes"
-                    width={85}
-                    height={56}
-                  />
-                </td>
-                <td className="ant-table-cell">{order.orderDetail[0].name}</td>
-                <td className="ant-table-cell">{order.orderDetail[0].price}</td>
-                <td className="ant-table-cell">
-                  {order.orderDetail[0].quantity}
-                </td>
-                <td className="ant-table-cell">
-                  {order.orderDetail[0].price * order.orderDetail[0].quantity}
-                </td>
-              </tr>
+              {order.orderDetail?.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td className="ant-table-cell">{order.id}</td>
+                    <td className="ant-table-cell">
+                      <img
+                        src={item.image}
+                        alt="Shoes"
+                        width={70}
+                        height={65}
+                        style={{ objectFit: "over" }}
+                      />
+                    </td>
+                    <td className="ant-table-cell">{item.name}</td>
+                    <td className="ant-table-cell">{item.price}</td>
+                    <td className="ant-table-cell">{item.quantity}</td>
+                    <td className="ant-table-cell">
+                      {item.price * item.quantity}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -120,44 +123,18 @@ export default function Profile() {
       key: "id",
     },
     {
-      title: "img",
-      dataIndex: "img",
-      key: "img",
-      render: (img) => <img src={img} alt="shoes" width={85} height={52} />,
+      title: "image",
+      dataIndex: "image",
+      key: "image",
+      render: (image) => <img src={image} alt="Favorite" />,
     },
     {
       title: "name",
       dataIndex: "name",
       key: "name",
     },
-    {
-      title: "price",
-      dataIndex: "price",
-      key: "price",
-    },
-    {
-      title: "quantity",
-      dataIndex: "quantity",
-      key: "quantity",
-    },
-    {
-      title: "total",
-      dataIndex: "total",
-      key: "total",
-    },
   ];
-  const data = [...userLogin.ordersHistory].map((item, index) => {
-    return {
-      date: item.date,
-      id: item.id,
-      img: item.orderDetail[0].image,
-      name: item.orderDetail[0].name,
-      quantity: item.orderDetail[0].quantity,
-      price: item.orderDetail[0].price,
-      total: item.orderDetail[0].quantity * item.orderDetail[0].price,
-    };
-  });
-  console.log(data);
+  const data = [];
   // 3
   useEffect(() => {
     if (!getStore(USER_LOGIN)) {
@@ -323,7 +300,7 @@ export default function Profile() {
           <Tabs defaultActiveKey="1">
             <Tabs.TabPane tab="Order history" key="1">
               <div className="history">{renderOrderTable(userLogin)}</div>
-              <div style={{textAlign:'right'}}>
+              <div style={{ textAlign: "right" }}>
                 <Pagination defaultCurrent={1} total={50} />
               </div>
             </Tabs.TabPane>
