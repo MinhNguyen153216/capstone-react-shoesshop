@@ -15,8 +15,13 @@ export default function Pagination({
     // totalCount là BE cung cấp khi gọi API
     // pageSize là số lương mỗi phần tử được hiển thị trong 1 page, FE có thể tự quyết định
     // Math.ceil là làm tròn lên, ví dụ 2.5 làm tròn lên 3
-
     const totalPage = Math.ceil(totalCount / pageSize);
+
+    // Math.max truyền vào 2 tham số => trả về số lớn hơn, ví dụ max = Math.max(2, 5) => 5
+    // Tìm firstPage dựa trên currentPage, ví dụ currentPage là 2, 
+    //currentPage - delta = 2-2=0 => lúc này firstPage là 1
+    // Nếu currentPage là 6, mà mình đã quy ước delta bằng 2 thì sẽ hiên trên UI là 4 5 6 7 8
+    // => currentPage - delta lúc này là 4 mà Math.max(1, 4) thì sẽ trả về 4 
   };
 
   return <div>pagination</div>;

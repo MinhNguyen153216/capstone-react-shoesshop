@@ -15,6 +15,7 @@ import {
 const initialState = {
   userLogin: getStoreJson(USER_LOGIN),
   // userLogin: { a: "asd", b: "zxc" },
+  test: 1,
 };
 
 const userReducer = createSlice({
@@ -25,14 +26,14 @@ const userReducer = createSlice({
       console.log("action", action.payload);
       state.userLogin = action.payload;
     },
-    logOutUserAction: (state, action)=>{
+    logOutUserAction: (state, action) => {
       localStorage.clear();
       state.userLogin = null;
-    }
+    },
   },
 });
 
-export const { getProfileAction,logOutUserAction } = userReducer.actions;
+export const { getProfileAction, logOutUserAction } = userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -95,7 +96,7 @@ export const updateProfileApi = (userUpdate) => {
       const result = await http.post("/Users/updateProfile", userUpdate);
       console.log("updateProfileApi", result);
       dispatch(getProfileApi());
-      alert('Cập nhật dữ liệu thành công!')
+      alert("Cập nhật dữ liệu thành công!");
     } catch (err) {
       console.log(err);
       alert("Cập nhật dữ liệu không thành công!");
