@@ -15,7 +15,12 @@ import {
 const initialState = {
   userLogin: getStoreJson(USER_LOGIN),
   // userLogin: { a: "asd", b: "zxc" },
+<<<<<<< HEAD
   test: 1,
+=======
+  userFavorite: getStoreJson("USER_FAV"),
+  test: 1
+>>>>>>> 69b745cb2b0612f0360bf5db85b4cc0e5f209ad5
 };
 
 const userReducer = createSlice({
@@ -30,10 +35,23 @@ const userReducer = createSlice({
       localStorage.clear();
       state.userLogin = null;
     },
+<<<<<<< HEAD
   },
 });
 
 export const { getProfileAction, logOutUserAction } = userReducer.actions;
+=======
+    getUserFavAction: (state, action) => {
+      console.log("action", action.payload);
+      state.userFavorite = action.payload;
+    },
+
+  },
+});
+
+export const { getProfileAction, logOutUserAction, getUserFavAction } =
+  userReducer.actions;
+>>>>>>> 69b745cb2b0612f0360bf5db85b4cc0e5f209ad5
 
 export default userReducer.reducer;
 
@@ -64,6 +82,7 @@ export const loginApi = (userLogin) => {
       setStore(ACCESS_TOKEN, result.data.content.accessToken);
 
       dispatch(getProfileApi());
+      dispatch(getProductsFavoriteApi());
       alert("Đăng nhập thành công!");
       history.push("/profile");
     } catch (err) {
@@ -100,6 +119,20 @@ export const updateProfileApi = (userUpdate) => {
     } catch (err) {
       console.log(err);
       alert("Cập nhật dữ liệu không thành công!");
+    }
+  };
+};
+export const getProductsFavoriteApi = (
+  accessToken = getStore(ACCESS_TOKEN)
+) => {
+  return async (dispatch) => {
+    try {
+      let result = await http.get("/Users/getproductfavorite");
+      console.log("getProductsFavoriteApi", result.data.content);
+      setStoreJson("USER_FAV", result.data.content);
+      dispatch(getUserFavAction(result.data.content));
+    } catch (err) {
+      console.log(err);
     }
   };
 };

@@ -1,107 +1,101 @@
-import React from "react";
-import { LikeOutlined, MessageOutlined, StarOutlined } from "@ant-design/icons";
-import { Avatar, List, Space } from "antd";
+import React, { useState } from "react";
+import { Table } from "antd";
+
+const columns = [
+  {
+    title: "Name",
+    dataIndex: "name",
+  },
+  {
+    title: "Age",
+    dataIndex: "age",
+  },
+  {
+    title: "Address",
+    dataIndex: "address",
+  },
+];
+
+const data = [];
+
+for (let i = 0; i < 46; i++) {
+  data.push({
+    key: i,
+    name: `Edward King ${i}`,
+    age: 32,
+    address: `London, Park Lane no. ${i}`,
+  });
+}
+
+
 
 export default function Cart() {
-  const myArr = [{ id: 1 }, { id: 2 }, { id: 3 }];
 
-  // const data = Array.from({
-  //   length: 23,
-  // }).map((_, i) => ({
-  //   href: "https://ant.design",
-  //   title: `ant design part ${i}`,
-  //   avatar: "https://joeschmoe.io/api/v1/random",
-  //   description:
-  //     "Ant Design, a design language for background applications, is refined by Ant UED Team.",
-  //   content:
-  //     "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
-  // }));
 
-  const IconText = ({ icon, text }) => (
-    <Space>
-      {React.createElement(icon)}
-      {text}
-    </Space>
-  );
-
-  const data = [
-    {
-      asd: "zxc",
-      href: "https://ant.design",
-      title: `ant design part 1`,
-      avatar: "https://joeschmoe.io/api/v1/random",
-      description:
-        "Ant Design, a design language for background applications, is refined by Ant UED Team.",
-      content:
-        "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
-    },
-    {
-      asd: "asd",
-      href: "https://ant.design",
-      title: `ant design part 2`,
-      avatar: "https://joeschmoe.io/api/v1/random",
-      description:
-        "Ant Design, a design language for background applications, is refined by Ant UED Team.",
-      content:
-        "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
-    },
-  ];
-
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+  
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+    selections: [
+      Table.SELECTION_ALL,
+      Table.SELECTION_INVERT,
+      Table.SELECTION_NONE,
+      {
+        key: "odd",
+        text: "Select Odd Row",
+        onSelect: (changableRowKeys) => {
+          let newSelectedRowKeys = [];
+          newSelectedRowKeys = changableRowKeys.filter((_, index) => {
+            if (index % 2 !== 0) {
+              return false;
+            }
+  
+            return true;
+          });
+          setSelectedRowKeys(newSelectedRowKeys);
+        },
+      },
+      {
+        key: "even",
+        text: "Select Even Row",
+        onSelect: (changableRowKeys) => {
+          let newSelectedRowKeys = [];
+          newSelectedRowKeys = changableRowKeys.filter((_, index) => {
+            if (index % 2 !== 0) {
+              return true;
+            }
+  
+            return false;
+          });
+          setSelectedRowKeys(newSelectedRowKeys);
+        },
+      },
+    ],
+  };
   return (
-    <div>
-      <List
-        itemLayout="vertical"
-        size="large"
-        pagination={{
-          onChange: (page) => {
-            console.log(page);
-          },
-          pageSize: 3,
-        }}
-        dataSource={data}
-        footer={
-          <div>
-            <b>ant design</b> footer part
-          </div>
-        }
-        renderItem={(item) => (
-          <List.Item
-            key={item.title}
-            // actions={[
-            //   <IconText
-            //     icon={StarOutlined}
-            //     text="156"
-            //     key="list-vertical-star-o"
-            //   />,
-            //   <IconText
-            //     icon={LikeOutlined}
-            //     text="156"
-            //     key="list-vertical-like-o"
-            //   />,
-            //   <IconText
-            //     icon={MessageOutlined}
-            //     text="2"
-            //     key="list-vertical-message"
-            //   />,
-            // ]}
-            // extra={
-            //   <img
-            //     width={272}
-            //     alt="logo"
-            //     src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-            //   />
-            // }
-          >
-            <List.Item.Meta
-              avatar={<Avatar src={item.avatar} />}
-              title={<a href={item.href}>{item.title}</a>}
-              description={item.description}
-              asd={item.asd}
+    <>
+      <section className="cart">
+        <div className="container">
+          <h3>Carts</h3>
+          <hr />
+          <div className="cart-table">
+            <Table
+              rowSelection={rowSelection}
+              columns={columns}
+              dataSource={data}
             />
-            {item.content}
-          </List.Item>
-        )}
-      />
-    </div>
+            ;
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
+
+
+//dispatch useState để gửi các dòng đã chọn lên Api

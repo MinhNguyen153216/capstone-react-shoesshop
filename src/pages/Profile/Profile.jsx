@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { USER_LOGIN, getStore } from "../../util/tool";
 import {
+  getProductsFavoriteApi,
   getProfileApi,
   updateProfileApi,
 } from "../../redux/reducers/userReducer";
@@ -13,7 +14,8 @@ import { Pagination } from "antd";
 
 export default function Profile() {
   // 1
-  const { userLogin } = useSelector((state) => state.userReducer);
+  const { userLogin, userFavorite } = useSelector((state) => state.userReducer);
+  console.log("profile_Favorite", userFavorite);
   const dispatch = useDispatch();
   const form = useFormik({
     initialValues: {
@@ -53,7 +55,6 @@ export default function Profile() {
     }
     console.log(userLogin.ordersHistory);
     return userLogin.ordersHistory.map((order, index) => {
-      console.log(order);
       return (
         <div key={index} style={{ marginTop: "65px" }}>
           <p
@@ -120,27 +121,37 @@ export default function Profile() {
     {
       title: "id",
       dataIndex: "id",
-      key: "id",
+      
     },
     {
       title: "image",
       dataIndex: "image",
-      key: "image",
-      render: (image) => <img src={image} alt="Favorite" />,
+     
+
+      render: (image) => (
+        <img src={image} alt="Favorite" width={70} height={65} />
+      ),
     },
     {
       title: "name",
       dataIndex: "name",
-      key: "name",
+     
     },
   ];
-  const data = [];
+  let favorite = userFavorite?.productsFavorite
+    ? userFavorite.productsFavorite
+    : [];
+  console.log("item", favorite);
+  const data = favorite;
+  console.log("data ", data);
+
   // 3
   useEffect(() => {
     if (!getStore(USER_LOGIN)) {
       dispatch(getProfileApi());
+      dispatch(getProductsFavoriteApi());
     }
-  }, [userLogin]);
+  }, [userLogin, userFavorite]);
   // 2
   return (
     <div className="profile py-4">
@@ -299,13 +310,19 @@ export default function Profile() {
         <div className="container">
           <Tabs defaultActiveKey="1">
             <Tabs.TabPane tab="Order history" key="1">
-              <div className="history">{renderOrderTable(userLogin)}</div>
-              <div style={{ textAlign: "right" }}>
-                <Pagination defaultCurrent={1} total={50} />
-              </div>
+              <>
+                <div className="history">{renderOrderTable(userLogin)}</div>
+                <div style={{ textAlign: "right" }}>
+                  <Pagination defaultCurrent={1} total={50} />
+                </div>
+              </>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Favorite" key="2">
-              <Table columns={columns} dataSource={data} />
+              <Table
+                columns={columns}
+                dataSource={data}
+                rowKey={obj => obj.id} 
+              />
             </Tabs.TabPane>
           </Tabs>
         </div>
