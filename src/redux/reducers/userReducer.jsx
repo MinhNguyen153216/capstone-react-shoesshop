@@ -15,12 +15,8 @@ import {
 const initialState = {
   userLogin: getStoreJson(USER_LOGIN),
   // userLogin: { a: "asd", b: "zxc" },
-<<<<<<< HEAD
-  test: 1,
-=======
   userFavorite: getStoreJson("USER_FAV"),
   test: 1
->>>>>>> 69b745cb2b0612f0360bf5db85b4cc0e5f209ad5
 };
 
 const userReducer = createSlice({
@@ -35,12 +31,6 @@ const userReducer = createSlice({
       localStorage.clear();
       state.userLogin = null;
     },
-<<<<<<< HEAD
-  },
-});
-
-export const { getProfileAction, logOutUserAction } = userReducer.actions;
-=======
     getUserFavAction: (state, action) => {
       console.log("action", action.payload);
       state.userFavorite = action.payload;
@@ -51,7 +41,6 @@ export const { getProfileAction, logOutUserAction } = userReducer.actions;
 
 export const { getProfileAction, logOutUserAction, getUserFavAction } =
   userReducer.actions;
->>>>>>> 69b745cb2b0612f0360bf5db85b4cc0e5f209ad5
 
 export default userReducer.reducer;
 
