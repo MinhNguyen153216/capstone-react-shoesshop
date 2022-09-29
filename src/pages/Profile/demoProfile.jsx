@@ -87,6 +87,7 @@ const TableCart = () => {
         action: arrCart[i].id,
       });
     }
+  }
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [loading, setLoading] = useState(false);
   

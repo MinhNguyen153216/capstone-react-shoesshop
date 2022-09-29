@@ -9,6 +9,7 @@ import {
   http,
   setCookie,
 } from "../../util/tool";
+import { getProfileApi } from "./userReducer";
 
 const initialState = {
   listProduct: [],
@@ -39,6 +40,31 @@ const productReducer = createSlice({
     clearListCartTempAction: (state, action) => {
       state.listCartTemp = [];
     },
+    changeQuantityAction: (state, action) => {
+      console.log("action", action.payload);
+      let index = state.listCartTemp.findIndex(
+        (i) => i.id === action.payload[1]
+      );
+      if (index !== -1) {
+        state.listCartTemp[index].quantityState += action.payload[0];
+      }
+    },
+    handleDeleteAction: (state, action) => {
+      let newListCartTemp = state.listCartTemp.filter(
+        (i) => i.id !== action.payload
+      );
+      state.listCartTemp = newListCartTemp;
+    },
+
+    submitOrderAction: (state, action) => {
+      let newListCartTemp = [...state.listCartTemp];
+      console.log(action.payload.orderDetail);
+      action.payload.orderDetail.forEach((i, index) => {
+        newListCartTemp = newListCartTemp.filter((j) => j.id !== i.productId);
+      });
+      console.log("newListCartTemp", newListCartTemp);
+      state.listCartTemp = newListCartTemp;
+    },
   },
 });
 
@@ -47,6 +73,9 @@ export const {
   getProductDetailAction,
   addToCartAction,
   clearListCartTempAction,
+  changeQuantityAction,
+  handleDeleteAction,
+  submitOrderAction,
 } = productReducer.actions;
 
 export default productReducer.reducer;
@@ -68,6 +97,20 @@ export const getProductDetailApi = (id) => {
     try {
       let result = await http.get(`./product/getbyid?id=${id}`);
       dispatch(getProductDetailAction(result.data.content));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const postOrderProductApi = (order) => {
+  return async (dispatch) => {
+    try {
+      const result = await http.post("/Users/order", order);
+      console.log(result);
+      alert("Đặt hàng thành công!");
+      dispatch(submitOrderAction(order));
+      dispatch(getProfileApi());
     } catch (err) {
       console.log(err);
     }

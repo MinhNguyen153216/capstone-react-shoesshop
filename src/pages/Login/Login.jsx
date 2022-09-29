@@ -93,7 +93,7 @@ export default function Login() {
                     </NavLink>
                   </div>
                   <div id="btnSubmit">
-                    <button type="submit" className="btn-submit btn btn-primary">
+                    <button type="submit" className="btn-submit">
                       Login
                     </button>
                   </div>

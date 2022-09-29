@@ -294,7 +294,7 @@ export default function Profile() {
                     <div id="btnSubmit">
                       <button
                         type="submit"
-                        className="btn-submit btn btn-primary"
+                        className="btn-submit"
                       >
                         Update
                       </button>
