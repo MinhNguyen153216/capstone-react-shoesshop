@@ -134,15 +134,15 @@ export const fbLoginApi = (fbToken) => {
       console.log(result);
       console.log(result.data.content.accessToken);
 
-      // setCookie(ACCESS_TOKEN, result.data.content.accessToken, 30);
-      // setStore(ACCESS_TOKEN, result.data.content.accessToken);
+      setCookie(ACCESS_TOKEN, result.data.content.accessToken, 30);
+      setStore(ACCESS_TOKEN, result.data.content.accessToken);
 
-      // dispatch(getProfileApi());
-      // alert("Đăng nhập thành công!");
-      // history.push("/index");
+      dispatch(getProfileApi());
+      alert("Đăng nhập thành công!");
+      history.push("/index");
     } catch (err) {
-      // alert("Kiểm tra lại email và password");
-      // history.push("/login");
+      alert("Kiểm tra lại email và password");
+      history.push("/login");
       console.log(err);
     }
   };

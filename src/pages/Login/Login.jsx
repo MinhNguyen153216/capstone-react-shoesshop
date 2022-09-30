@@ -2,11 +2,9 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 import { loginApi, fbLoginApi } from "../../redux/reducers/userReducer";
-// import FacebookLogin from "react-facebook-login";
-// import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import FacebookLogin from "react-facebook-login";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -34,6 +32,7 @@ export default function Login() {
     console.log(response);
     dispatch(fbLoginApi(response));
   };
+
   return (
     <div>
       <section className="register">
@@ -98,51 +97,44 @@ export default function Login() {
                     </button>
                   </div>
                 </div>
+                <div className="login-facebook">
+                    <FacebookLogin
+                      appId="1108418000101590"
+                      autoLoad={true}
+                      fields="name,email,picture"
+                      callback={responseFacebook}
+                    />
+                  </div>
               </form>
 
-              <div className="row justify-content-center py-4">
-                <div className="col-6 form-group d-flex align-items-center ">
+              {/* <div className="row justify-content-center py-4">
+                <div className="col-6 d-flex align-items-center ">
+                <FacebookLogin
+    appId="1108418000101590"
+    autoLoad={true}
+    fields="name,email,picture"
+    onClick={componentClicked}
+    callback={responseFacebook} />,
                   {/* <FacebookLogin
                     appId="1108418000101590"
-                    autoLoad={true}
-                    fields="name,email,picture"
+                    autoLoad
                     callback={responseFacebook}
                     render={(renderProps) => (
                       <button
-                        className="btn-3 btn btn-primary align-items-center fs-5 d-flex justify-content-center"
+                        className="btn-3 align-items-center fs-5 d-flex justify-content-center"
                         onClick={renderProps.onClick}
                       >
-                        <FontAwesomeIcon
-                          icon="fa-brands fa-facebook"
-                          className="me-1 display-6"
-                        />
-                        <span className="px-3 ">Continue With Facebook</span>
+                        <p className="px-3 fa-brands fa-facebook">
+                          Continue With Facebook
+                        </p>
                       </button>
                     )}
                   /> */}
-                </div>
-              </div>
+              {/* </div>
+              </div> */}
             </div>
           </div>
         </div>
-        {/* <FacebookLogin
-          appId="493742808918289"
-          autoLoad={true}
-          fields="name,email,picture"
-          callback={responseFacebook}
-          render={(renderProps) => (
-            <button
-              className="btn-3 btn btn-primary align-items-center fs-5"
-              onClick={renderProps.onClick}
-            >
-              <FontAwesomeIcon
-                icon="fa-brands fa-facebook"
-                className="me-1 display-6"
-              />
-              <span className="px-3">Continue With Facebook</span>
-            </button>
-          )}
-        /> */}
       </section>
     </div>
   );

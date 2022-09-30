@@ -8,6 +8,7 @@ import {
 import { useDispatch } from "react-redux";
 import { postOrderProductApi } from "../../redux/reducers/productReducer";
 import { history } from "../../index";
+import { Navigate } from "react-router-dom";
 
 export default function Cart() {
   const { listCartTemp } = useSelector((state) => state.productReducer);
