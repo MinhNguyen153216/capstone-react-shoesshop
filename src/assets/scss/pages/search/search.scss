@@ -1,2 +1,131 @@
 @import "../../base/base";
 @import "../../themes/variables";
+
+.search-bar {
+  .container {
+    p {
+      margin-top: 68px;
+      margin-left: 50px;
+      margin-bottom: 5px;
+      @include text-config(500, 18px, 24px, rgba(0, 0, 0, 0.6));
+    }
+    .form-container {
+      display: flex;
+      input {
+        margin-left: 44px;
+        margin-bottom: 44px;
+        width: 35%;
+        background: rgba(33, 33, 33, 0.08);
+        border-radius: 4px 4px 0px 0px;
+      }
+      button {
+        margin-left: 35px;
+        margin-bottom: 44px;
+      }
+    }
+  }
+}
+
+.search-result {
+  .search-title {
+    height: 74px;
+    background: linear-gradient(180deg, #f21299 0%, #1b02b5 100%);
+    padding-left: 31px;
+    display: flex;
+    align-items: center;
+    .container {
+      h1 {
+        margin: 0;
+        @include text-config(400, 40px, 48px, #ffffff);
+      }
+    }
+  }
+  .product {
+    .container {
+      .sort {
+        margin-left: 45px;
+        p {
+          margin: 0;
+          @include text-config(500, 18px, 24px, rgba(0, 0, 0, 0.6));
+        }
+        .sort-btn {
+          button {
+            // position: relative;
+            border: none;
+            text-align: left;
+            width: 443px;
+            height: 54px;
+            background: rgba(33, 33, 33, 0.08);
+            border-radius: 4px 4px 0px 0px;
+            padding-left: 14px;
+            margin-bottom: 5px;
+            @include text-config(400, 16px, 24px, rgba(0, 0, 0, 0.87));
+            line-height: 54px;
+            .triangle-dec {
+              position: relative;
+              top: -35px;
+              right: -350px;
+              width: 0px;
+              height: 0px;
+              z-index: 3;
+              border-top: 22px solid rgba(0, 0, 0, 1);
+              border-left: 22px solid transparent;
+              border-right: 22px solid transparent;
+              &:after {
+                position: absolute;
+                content: "";
+                width: 0px;
+                height: 0px;
+                border-top: 20px solid gray;
+                border-left: 20px solid transparent;
+                border-right: 20px solid transparent;
+                right: -20px;
+                bottom: 1px;
+              }
+            }
+            .triangle-asc {
+              position: relative;
+              top: -35px;
+              right: -350px;
+              width: 0px;
+              height: 0px;
+              z-index: 3;
+              border-bottom: 22px solid rgba(0, 0, 0, 1);
+              border-left: 22px solid transparent;
+              border-right: 22px solid transparent;
+              &:after {
+                position: absolute;
+                content: "";
+                width: 0px;
+                height: 0px;
+                border-bottom: 20px solid gray;
+                border-left: 20px solid transparent;
+                border-right: 20px solid transparent;
+                right: -20px;
+                top: 1px;
+              }
+            }
+          }
+        }
+      }
+      .row {
+        .no-result {
+          margin-bottom: 100px;
+          text-align: center;
+          // background-color: red;
+        }
+        .item {
+          .card {
+            position: relative;
+            .heart {
+              width: 35px;
+              position: absolute;
+              top: 30px;
+              right: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
