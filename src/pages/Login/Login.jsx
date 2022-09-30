@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { loginApi, fbLoginApi } from "../../redux/reducers/userReducer";
-import FacebookLogin from "react-facebook-login";
+// import FacebookLogin from "react-facebook-login";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -28,10 +28,10 @@ export default function Login() {
     },
   });
 
-  const responseFacebook = (response) => {
-    console.log(response);
-    dispatch(fbLoginApi(response));
-  };
+  // const responseFacebook = (response) => {
+  //   console.log(response);
+  //   dispatch(fbLoginApi(response));
+  // };
 
   return (
     <div>
@@ -98,13 +98,13 @@ export default function Login() {
                   </div>
                 </div>
                 <div className="login-facebook">
-                    <FacebookLogin
+                  {/* <FacebookLogin
                       appId="1108418000101590"
                       autoLoad={true}
                       fields="name,email,picture"
                       callback={responseFacebook}
-                    />
-                  </div>
+                    /> */}
+                </div>
               </form>
 
               {/* <div className="row justify-content-center py-4">

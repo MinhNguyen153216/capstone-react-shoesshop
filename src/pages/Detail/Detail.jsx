@@ -16,11 +16,15 @@ export default function Detail() {
   const { productDetail } = useSelector((state) => state.productReducer);
   const dispatch = useDispatch();
   const param = useParams();
+  let { id } = param;
 
   useEffect(() => {
-    let { id } = param;
     dispatch(getProductDetailApi(id));
-  }, [param.id]);
+  }, []);
+
+  useEffect(() => {
+    dispatch(getProductDetailApi(id));
+  }, [id]);
 
   const renderProductDetail = (productDetail) => {
     if (!productDetail) {

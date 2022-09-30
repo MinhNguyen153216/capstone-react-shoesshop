@@ -31,9 +31,11 @@ root.render(
         <Route path="" element={<App />}>
           <Route index element={<Index />} />
           <Route path="search" element={<Search />} />
+
           <Route path="detail">
             <Route path=":id" element={<Detail />} />
           </Route>
+          
           {/* <Route path="detail" element={<Detail />} /> */}
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
