@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { loginApi, fbLoginApi } from "../../redux/reducers/userReducer";
-// import FacebookLogin from "react-facebook-login";
+import FacebookLogin from "react-facebook-login";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -28,10 +28,11 @@ export default function Login() {
     },
   });
 
-  // const responseFacebook = (response) => {
-  //   console.log(response);
-  //   dispatch(fbLoginApi(response));
-  // };
+  const responseFacebook = (response) => {
+    let data = { facebookToken: response.accessToken };
+    console.log(data);
+    dispatch(fbLoginApi(data));
+  };
 
   return (
     <div>
@@ -107,21 +108,22 @@ export default function Login() {
                 </div>
               </form>
 
-              {/* <div className="row justify-content-center py-4">
-                <div className="col-6 d-flex align-items-center ">
-                <FacebookLogin
-    appId="1108418000101590"
-    autoLoad={true}
-    fields="name,email,picture"
-    onClick={componentClicked}
-    callback={responseFacebook} />,
+              <div className="row justify-content-center py-4">
+                <div className="">
+                  <FacebookLogin
+                    appId="637563051189682"
+                    autoLoad={false}
+                    fields="name,email,picture"
+                    callback={responseFacebook}
+                  />
+                  ,
                   {/* <FacebookLogin
                     appId="1108418000101590"
                     autoLoad
                     callback={responseFacebook}
                     render={(renderProps) => (
                       <button
-                        className="btn-3 align-items-center fs-5 d-flex justify-content-center"
+                        className="btn-3"
                         onClick={renderProps.onClick}
                       >
                         <p className="px-3 fa-brands fa-facebook">
@@ -130,8 +132,8 @@ export default function Login() {
                       </button>
                     )}
                   /> */}
-              {/* </div>
-              </div> */}
+                </div>
+              </div>
             </div>
           </div>
         </div>
